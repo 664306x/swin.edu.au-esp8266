@@ -49,3 +49,44 @@ function get_rating(tally, total_stations) {
         rating = "Monster!";
     return rating;
 }
+
+function write_page(station_id, total_stations) {
+    var cookie = document.cookie;
+    var station_score = Math.pow(2, station_id);
+    if(cookie.length == 0) {
+        var score = Math.pow(2, station_id);
+        document.cookie = "name=cookie_hunt&score=" + score;
+        document.write("<h1>You found your first cookie!</h1>");
+        document.write("<p>Finish the game by collecting all the cookies</p>");
+    }
+    else {
+        // Parse the cookie to get the score
+        var cookie_data = split_cookie();
+        cookie_name = cookie_data['name'];
+        score = cookie_data['score'];
+        // Check if this cookie has already been found
+        if(station_score & score) {
+            document.write("<h1>Welcome back</h1>");
+            document.write("<p>You've already found this cookie. Keep looking for the rest!</p>");
+        }
+        // If not, add this cookie to the score
+        else {
+            document.cookie = "name=cookie_score&score=" + (score + station_score);
+            // If all the cookies have been found, show the result
+            if(score === max_score(total_stations)) {
+                document.write("<h1>Congratulations - you found all the cookies!</h1>");
+            }
+            // Otherwise, show the new cookie found message
+            else {
+                document.write("<h1>You've found another cookie!</h1>");
+            }
+        }
+    }
+    var tally = calculate_tally(score, total_stations);
+    // Show progress meter
+    document.write("<p><meter>" + Math.round(100*tally/total_stations) + "%</meter></p>");
+    // Animate meter
+    
+    // Show rating
+    document.write("<p>Your rating is: " + get_rating(tally, total_stations) + "</p>");
+}
