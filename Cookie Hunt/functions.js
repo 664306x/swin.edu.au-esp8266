@@ -50,8 +50,7 @@ function get_rating(tally, total_stations) {
     return rating;
 }
 
-function write_page(station_id, total_stations) {
-    var cookie = document.cookie;
+function write_page(station_id, total_stations, cookie) {
     var station_score = Math.pow(2, station_id);
     if(cookie.length == 0) {
         var score = Math.pow(2, station_id);

@@ -8,12 +8,13 @@
 </head>
 
 <body>
-    <img src="cookiemonster.jpeg" />
+    <img src="cookiemonster.jpg" />
     <script type="text/javascript" src="functions.js"></script>
     <script type="text/javascript">
         var station_id = 0; // station ids start at 0 and are consecutive
         var total_stations = 4;
-        write_page(station_id, total_stations);
+        var cookie = document.cookie;
+        write_page(station_id, total_stations, cookie);
     </script>
     <noscript>
         <h1>Please turn on Javascript!</h1>
