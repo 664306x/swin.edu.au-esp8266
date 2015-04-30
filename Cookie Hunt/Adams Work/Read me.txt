@@ -1,0 +1,38 @@
+TO RUN:
+Upload CookieTest.lua
+Edit script below
+Run script
+connect to esp via web
+type anything into the text field and press enter
+once the page has refreshed, refresh it again.
+read the payload on the serial connection
+
+you will see that the "username" will be the thing that you wrote earlier
+
+if upload and run the script on another esp and refresh the website you will see the payload is the same
+
+
+
+
+file.remove("init.lua")
+file.open("init.lua","w")
+file.writeline([[wifi.setmode(wifi.STATION)]])
+file.writeline([[print(wifi.getmode())]])
+
+--Need to change this
+file.writeline([[wifi.sta.config("SSID","PASSWORD")]])
+
+--Need to change IP and gateway this too
+file.writeline([[wifi.sta.setip({ip="192.168.1.14",netmask="255.255.255.0",gateway="192.168.1.254"})]])
+
+file.writeline([[print(wifi.sta.getip())]])
+file.writeline([[dofile("CookieTest.lua")]])
+file.writeline([[hex_to_char = function(x)]])
+file.writeline([[return string.char(tonumber(x, 16))]])
+file.writeline([[end]])
+file.writeline([[unescape = function(url)]])
+file.writeline([[output = url:gsub("%%(%x%x)", hex_to_char)]])
+file.writeline([[return output]])
+file.writeline([[end]])
+file.close()
+node.restart()
