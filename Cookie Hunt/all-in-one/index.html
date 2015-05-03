@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Cookie Hunt</title>
+    <!-- author: Edward Francis Gilbert
+         date: Wednesday 2 May 2015 -->
+    <script type="text/javascript">
+        // Put the station_id here
+        // station ids start at 0 and are consecutive
+        // make sure you declare the right number of total stations in functions.js
+        var station_id = 0;
+    </script>
+</head>
+
+<body>
+    <noscript>
+        <h1>Please turn on Javascript!</h1>
+        <p>This game requires Javascript in order to work. Please turn on Javascript in your browser settings and make sure cookies are enabled.</p>
+    </noscript>
+    <script type="text/javascript">
+        "use strict";function max_score(o){for(var e=0,t=0;o>t;t++)e+=Math.pow(2,t);return e}function get_tally(o,e){for(var t=0,i=0;e>i;i++)Math.pow(2,i)&o&&t++;return t}function split_cookie(){split_cookie={};var o,e;o=cookie.split("&");for(var t=0;t<o.length;t++)e=o[t].split("="),split_cookie[e[0]]=e[1];return split_cookie}function get_rating(o,e){var t,i=o/e;return.25>i?t="Prefer ice cream":.5>i?t="Connoisseur":.75>i?t="Aficionado":1>i?t="Maniac":1==i&&(t="Monster!"),t}function write_page(o,e,t){var i=Math.pow(2,o);if(0==t.length){var n=Math.pow(2,o);document.cookie="name=cookie_hunt&score="+n,document.write("<h1>You found your first cookie!</h1>"),document.write("<p>Finish the game by collecting all the cookies</p>")}else{var r=split_cookie(),n=(r.name,r.score);i&n?(document.write("<h1>Welcome back</h1>"),document.write("<p>You've already found this cookie. Keep looking for the rest!</p>")):(document.cookie="name=cookie_score&score="+(n+i),document.write(n===max_score(e)?"<h1>Congratulations - you found all the cookies!</h1>":"<h1>You've found another cookie!</h1>"))}document.write("<p>You've found "+get_tally(n,e)+" out of "+e+" cookies. Your cookie rating is: "+get_rating(get_tally(n,e),e)+"</p>")}var total_stations=3,cookie=document.cookie;window.onload=write_page(station_id,total_stations,cookie);
+    </script>
+    <img src="http://i.dailymail.co.uk/i/pix/2013/09/22/article-0-18297CEF00000578-775_634x426.jpg" />
+</body>
+
+</html>

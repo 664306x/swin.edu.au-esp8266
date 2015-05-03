@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="utf-8" />
     <title>Cookie Hunt</title>
     <!-- author: Edward Francis Gilbert
          date: Wednesday 29 April 2015 -->
+    <script type="text/javascript">
+        // Put the station_id here
+        // station ids start at 0 and are consecutive
+        // make sure you declare the right number of total stations in functions.js
+        var station_id = 0;
+    </script>
 </head>
 
 <body>
-    <img src="cookiemonster.jpg" />
-    <script type="text/javascript" src="functions.js"></script>
-    <script type="text/javascript">
-        var station_id = 0; // station ids start at 0 and are consecutive
-        var total_stations = 4;
-        var cookie = document.cookie;
-        write_page(station_id, total_stations, cookie);
-    </script>
     <noscript>
         <h1>Please turn on Javascript!</h1>
         <p>This game requires Javascript in order to work. Please turn on Javascript in your browser settings and make sure cookies are enabled.</p>
     </noscript>
+    <script type="text/javascript" src="functions.js"></script>
+    <img src="cookiemonster.jpg" />
 </body>
 
 </html>

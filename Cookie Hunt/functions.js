@@ -1,3 +1,8 @@
+"use strict";
+
+var total_stations = 3; // Change to however many stations you desire.
+var cookie = document.cookie;
+
 /* Function to calculate max score
  * The score is a bit register:
  * - game progress is represented by no. of on bits, NOT the size of 
@@ -9,13 +14,14 @@
  *  (where & is the binary AND operation)
  */
 function max_score(total) {
-    max_score = 0;
+    var max_score = 0;
     for(var i = 0; i < total; i++)
         max_score += Math.pow(2, i);
     return max_score;
 }
 
-function calculate_tally(score, total_stations) {
+/* Get the number of stations found */
+function get_tally(score, total_stations) {
     var cookies = 0;
     for(var i = 0; i < total_stations; i++) {
         if(Math.pow(2, i) & score)
@@ -24,8 +30,12 @@ function calculate_tally(score, total_stations) {
     return cookies;
 }
 
+/* Parse the cookie into a 2D array
+ * Assumes tuples separated by '&',key + value separated by '='
+ */
 function split_cookie() {
     split_cookie = {};
+    var s1, s2;
     s1 = cookie.split("&");
     for(var i = 0; i < s1.length; i++) {
         s2 = s1[i].split("=");
@@ -34,6 +44,7 @@ function split_cookie() {
     return split_cookie;
 }
 
+/* Returns a rating (string) of current progress */
 function get_rating(tally, total_stations) {
     var rating;
     var progress = tally / total_stations;
@@ -61,8 +72,8 @@ function write_page(station_id, total_stations, cookie) {
     else {
         // Parse the cookie to get the score
         var cookie_data = split_cookie();
-        cookie_name = cookie_data['name'];
-        score = cookie_data['score'];
+        var cookie_name = cookie_data['name'];
+        var score = cookie_data['score'];
         // Check if this cookie has already been found
         if(station_score & score) {
             document.write("<h1>Welcome back</h1>");
@@ -81,11 +92,6 @@ function write_page(station_id, total_stations, cookie) {
             }
         }
     }
-    var tally = calculate_tally(score, total_stations);
-    // Show progress meter
-    document.write("<p><meter>" + Math.round(100*tally/total_stations) + "%</meter></p>");
-    // Animate meter
-    
-    // Show rating
-    document.write("<p>Your rating is: " + get_rating(tally, total_stations) + "</p>");
+    document.write("<p>You've found " + get_tally(score, total_stations) + " out of " + total_stations + " cookies. Your cookie rating is: " + get_rating(get_tally(score,total_stations), total_stations) + "</p>");
 }
+window.onload = write_page(station_id, total_stations, cookie);
