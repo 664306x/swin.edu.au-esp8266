@@ -1,31 +1,52 @@
---[[
-gpio Sensors
- dB trigger: gpio.INT  (interupt), 	pin 2 (index 4)
- IR motion: gpio.INT  (interupt), 	pin 3 (index 9)
- Speaker (beep): gpio.OUTPUT, 		pin 4 (index 2)
-]]
-
---[[
-	Timer syntax (nodemcu)
-		-- print "hello world" every 1000ms
-		tmr.alarm(0, 1000, 1, function() print("hello world") end )
-]]
+local module = {}
 
 currentState = "init"
 showerUsedRecently = "0"
---map gpio index to names
-for k,v in ipairs{3,10,4,9,2,1,nil,nil,nil,11,12,nil,6,7,5,8,0} do _G['GPIO'..k-1]=v end
-gpio.mode(GPIO4, gpio.OUTPUT)
-gpio.mode(GPIO2, gpio.INT)
-gpio.mode(GPIO3, gpio.INT)
-gpio.mode(GPIO5, gpio.INT)--kill switch
+for k,v in ipairs{3,10,4,9,2,1,nil,nil,nil,11,12,nil,6,7,5,8,0} do _G['GPIO'..k-1]=v end   --map gpio index to names
+
+function module.start()
+	print("application start")
+	--[[
+	gpio Sensors
+	 dB trigger: gpio.INT  (interupt), 	pin 2 (index 4)
+	 IR motion: gpio.INT  (interupt), 	pin 3 (index 9)
+	 Speaker (beep): gpio.OUTPUT, 		pin 4 (index 2)
+	 kill switch: gpio.INT,				pin 5 (index 1)
+	]]
+	gpio.mode(GPIO4, gpio.OUTPUT)
+	gpio.mode(GPIO2, gpio.INT)
+	gpio.mode(GPIO3, gpio.INT)
+	gpio.mode(GPIO5, gpio.INT)
+
+	-- MQTT
+	-- init mqtt client with keepalive timer 120sec (the open server im using here (eclipse) doesnt require authentication)
+	m = mqtt.Client("clientid", 120, "user", "password")
+	m:lwt("/lwt", "offline", 0, 0)
+	m:on("connect", function(con) print ("connected") end)
+	m:on("offline", function(con) print ("offline") end)
+
+	-- on publish message receive event
+	-- for debug purpose ~remove me after c++ listen/log app written
+	m:on("message", function(conn, topic, data)
+	  print(topic .. ":" )
+	  if data ~= nil then
+		print(data)
+	  end
+	end)
+	-- end mqtt
+
+	gpio.trig(gpio2,'both',onChange)
+	gpio.trig(gpio3,'both',onChange)
+	gpio.trig(gpio5,'both',killSwitch)
+end
+
 
 --returns an code that relates to the state
 function getState()
--- map a dictionary (no need, just use binary....)
-a = gpio.read(GPIO2)--dB trigger
-b = gpio.read(GPIO3)--IR sens
-return a..b
+	-- map a dictionary (no need, just use binary....)
+	a = gpio.read(GPIO2)--dB trigger
+	b = gpio.read(GPIO3)--IR sens
+	return a..b
 end
 
 function stateTransition(newState)
@@ -103,23 +124,6 @@ function killSwitch()
 	onChange()
 end
 
--- MQTT
-
--- init mqtt client with keepalive timer 120sec (the open server im using here doesnt require authentication)
-m = mqtt.Client("clientid", 120, "user", "password")
-m:lwt("/lwt", "offline", 0, 0)
-m:on("connect", function(con) print ("connected") end)
-m:on("offline", function(con) print ("offline") end)
-
--- on publish message receive event
--- for debug purpose ~remove me after c++ server app written
-m:on("message", function(conn, topic, data)
-  print(topic .. ":" )
-  if data ~= nil then
-    print(data)
-  end
-end)
-
 function writeToServer(msg)
 	m:connect("iot.eclipse.org", 1883, 0, function(conn) print("connected") end)
 	m:subscribe("/cab309eb-d5c1-47b3-b65f-90056d70d71d",0, function(conn) print("subscribe success") end)
@@ -127,9 +131,5 @@ function writeToServer(msg)
 	m:close();
 end
 
--- end mqtt
-
-gpio.trig(gpio2,'both',onChange)
-gpio.trig(gpio3,'both',onChange)
-gpio.trig(gpio5,'both',killSwitch)
+return module
 
