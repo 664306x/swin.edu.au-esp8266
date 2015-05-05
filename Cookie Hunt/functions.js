@@ -1,7 +1,8 @@
 "use strict";
-
-var total_stations = 3; // Change to however many stations you desire.
+var station_id = 0;
 var cookie = document.cookie;
+var total_stations = 3; // Change to however many stations you desire.
+var COOKIE_LIFETIME = 3600 * 24 * 1000; // = 24 hours in milliseconds
 
 /* Function to calculate max score
  * The score is a bit register:
@@ -62,28 +63,33 @@ function get_rating(tally, total_stations) {
 }
 
 function write_page(station_id, total_stations, cookie) {
+    var expiration_date = new Date();
     var station_score = Math.pow(2, station_id);
-    if(cookie.length == 0) {
-        var score = Math.pow(2, station_id);
-        document.cookie = "name=cookie_hunt&score=" + score;
+    // Parse the cookie to get the score
+    var cookie_data = split_cookie();
+    var cookie_name = cookie_data['name'];
+    var score = parseInt(cookie_data['score']);
+    // Cookie will be set to expire 24 hours from last access
+    expiration_date.setTime(parseInt(expiration_date.getTime() + COOKIE_LIFETIME));
+    if(!score) {
+        score = station_score;
+        document.cookie = "name=cookie_hunt&score=" + score + "; expires=" + expiration_date.toGMTString();
         document.write("<h1>You found your first cookie!</h1>");
         document.write("<p>Finish the game by collecting all the cookies</p>");
     }
     else {
-        // Parse the cookie to get the score
-        var cookie_data = split_cookie();
-        var cookie_name = cookie_data['name'];
-        var score = cookie_data['score'];
+        
         // Check if this cookie has already been found
         if(station_score & score) {
             document.write("<h1>Welcome back</h1>");
             document.write("<p>You've already found this cookie. Keep looking for the rest!</p>");
         }
-        // If not, add this cookie to the score
+        // If not, add this station_score to the score
         else {
-            document.cookie = "name=cookie_score&score=" + (score + station_score);
+            score += station_score;
+            document.cookie = "name=cookie_hunt&score=" + score + "; expires=" + expiration_date.toGMTString();
             // If all the cookies have been found, show the result
-            if(score === max_score(total_stations)) {
+            if(score == max_score(total_stations)) {
                 document.write("<h1>Congratulations - you found all the cookies!</h1>");
             }
             // Otherwise, show the new cookie found message
