@@ -1,6 +1,4 @@
 "use strict";
-var station_id = 0;
-var cookie = document.cookie;
 var total_stations = 3; // Change to however many stations you desire.
 var COOKIE_LIFETIME = 3600 * 24 * 1000; // = 24 hours in milliseconds
 
@@ -40,7 +38,7 @@ function split_cookie() {
     s1 = cookie.split("&");
     for(var i = 0; i < s1.length; i++) {
         s2 = s1[i].split("=");
-        split_cookie[s2[0]]=s2[1];
+        split_cookie[s2[0] ]=s2[1];
     }
     return split_cookie;
 }
