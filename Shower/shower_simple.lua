@@ -4,6 +4,9 @@ currentState = "init"
 showerUsedRecently = "0"
 for k,v in ipairs{3,10,4,9,2,1,nil,nil,nil,11,12,nil,6,7,5,8,0} do _G['GPIO'..k-1]=v end   --map gpio index to names
 
+offtimerActive=false
+alarmTimersActive=false
+
 function module.start()
 	print("application start")
 	--[[
@@ -70,37 +73,49 @@ function stateTransition(newState)
 	currentState = newState
 
 	if newState ==     "00" then
-		tmr.stop(0)
-		tmr.stop(1)
-		tmr.stop(2)
-		tmr.stop(3)
-		gpio.write(GPIO4, gpio.LOW)
+		if not offtimerActive then
+			offtimerActive=true
+			tmr.alarm(0,3000,0, showerFinished())
+		end
 	elseif newState == "01" then
-		tmr.stop(0)
-		tmr.stop(1)
-		tmr.stop(2)
-		tmr.stop(3)
-		gpio.write(GPIO4, gpio.LOW)
+		if not offtimerActive then
+			offtimerActive=true
+			tmr.alarm(0,3000,0, showerFinished())
+		end
 	elseif newState == "10" then
+		if not offtimerActive then
+			offtimerActive=true
+			tmr.alarm(0,3000,0, showerFinished())
+		end
+	elseif newState == "11" then
 		tmr.stop(0)
+		if not alarmTimersActive then
+			alarmTimersActive =true
+			tmr.alarm(1,(1000*120),0, beepBeep(2))
+			tmr.alarm(2,(1000*240),0, beepBeep(4))
+			tmr.alarm(3,(1000*300),0, thirdAlarm)
+		end
+	end
+end
+
+function showerFinished()
+		tmr.stop(0)
+		offtimerActive=false
+
 		tmr.stop(1)
 		tmr.stop(2)
 		tmr.stop(3)
+		alarmTimersActive=false
+
 		gpio.write(GPIO4, gpio.LOW)
-	elseif newState == "11" then
-		true
-		tmr.alarm(1,(1000*120),0, beepBeep(2))
-		tmr.alarm(2,(1000*240),0, beepBeep(4))
-		tmr.alarm(3,(1000*300),0, thirdAlarm)
-	end
 end
 
 function beepBeep(cnt)
 	for i=0,cnt,1
 		gpio.write(GPIO4, gpio.HIGH)
-		tmr.delay(500000)
+		tmr.delay(300000)
 		gpio.write(GPIO4, gpio.LOW)
-		tmr.delay(500000)
+		tmr.delay(300000)
 	end
 end
 
@@ -117,9 +132,13 @@ end
 
 function killSwitch()
 	tmr.stop(0)
+	offtimerActive=false
+
 	tmr.stop(1)
 	tmr.stop(2)
 	tmr.stop(3)
+	alarmTimersActive=false
+
 	gpio.write(GPIO4, gpio.LOW)
 	onChange()
 end
