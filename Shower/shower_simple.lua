@@ -12,13 +12,13 @@ function module.start()
 	--[[
 	gpio Sensors
 	 dB trigger: gpio.INT  (interupt), 	pin 2 (index 4)
-	 IR motion: gpio.INT  (interupt), 	pin 3 (index 9)
+	 IR motion: gpio.INT  (interupt), 	pin 13 (index 7)
 	 Speaker (beep): gpio.OUTPUT, 		pin 4 (index 2)
 	 kill switch: gpio.INT,				pin 5 (index 1)
 	]]
 	gpio.mode(GPIO4, gpio.OUTPUT)
 	gpio.mode(GPIO2, gpio.INT)
-	gpio.mode(GPIO3, gpio.INT)
+	gpio.mode(GPIO13, gpio.INT)
 	gpio.mode(GPIO5, gpio.INT)
 
 	-- MQTT
@@ -39,7 +39,7 @@ function module.start()
 	-- end mqtt
 
 	gpio.trig(gpio2,'both',onChange)
-	gpio.trig(gpio3,'both',onChange)
+	gpio.trig(gpio13,'both',onChange)
 	gpio.trig(gpio5,'both',killSwitch)
 end
 
@@ -48,7 +48,7 @@ end
 function getState()
 	-- map a dictionary (no need, just use binary....)
 	a = gpio.read(GPIO2)--dB trigger
-	b = gpio.read(GPIO3)--IR sens
+	b = gpio.read(GPIO13)--IR sens
 	return a..b
 end
 
