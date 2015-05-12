@@ -9,13 +9,13 @@ alarmTimersActive=false
 
 function module.start()
 	print("application start")
-	--[[
-	gpio Sensors
-	 dB trigger: gpio.INPUT  (input because it constantly switches), 	pin 13 (index 7)
-	 IR motion: ADC
-	 Speaker (beep): PWM 		pin 12 (index 6)
-	 kill switch: gpio.INT,				pin 14 (index 5)
-	]]
+
+--	 gpio Sensors
+--	 dB trigger: gpio.INPUT  (input because it constantly switches), 	pin 13 (index 7)
+--	 IR motion: ADC
+--	 Speaker (beep): PWM 		pin 12 (index 6)
+--	 kill switch: gpio.INT,				pin 14 (index 5)
+
 	gpio.mode(GPIO13, gpio.INPUT) -- microphone
 	gpio.mode(GPIO14, gpio.INT) -- off switch
 	gpio.write(GPIO14,0)
@@ -65,26 +65,24 @@ function getState()
 	  b = 0
 	else
 	  b = 1
+	end
 	return a..b
 end
 
 function stateTransition(newState)
---[[			STATES
+--			STATES
 	-- id	|desc					|sensors
 	------------------------------------------------------------------------
 	-- 00	|shower/bathroom not in use					|dB trigger: l, IR sens: l
 	-- 01	|someone in bathroom, or just ended shower	|dB trigger: l, IR sens: h
 	-- 10	|shower on, not in, running toget hot water?|dB trigger: h, IR sens: l
 	-- 11	|in shower									|dB trigger: h, IR sens: h
---]]
-
---[[			TIMERS
+--		TIMERS
 	-- 0    | delay before ending shower
 	-- 1	| alarm for being in the shower 2 minutes (1st, just beep)
 	-- 2	| alarm for being in the shower 4 minutes (2nd, just beep)
 	-- 3	| alarm for being in the shower 5 minutes (3rd, beep until state transition, and log event)
 	-- 4	| polling for state changes.
---]]
 
 	previousState = currentState
 	currentState = newState
@@ -134,6 +132,7 @@ end
 
 function beepBeep(cnt)
 	for i=0,cnt,1
+	do
 		pwm.start(GPIO12)
 		tmr.delay(300000)
 		pwm.stop(GPIO12)
