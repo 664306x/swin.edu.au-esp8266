@@ -11,15 +11,15 @@ function module.start()
 	print("application start")
 	--[[
 	gpio Sensors
-	 dB trigger: gpio.INT  (interupt), 	pin 2 (index 4)
-	 IR motion: gpio.INT  (interupt), 	pin 13 (index 7)
-	 Speaker (beep): gpio.OUTPUT, 		pin 4 (index 2)
-	 kill switch: gpio.INT,				pin 5 (index 1)
+	 dB trigger: gpio.INPUT  (input because it constantly switches), 	pin 13 (index 7)
+	 IR motion: ADC
+	 Speaker (beep): PWM 		pin 12 (index 6)
+	 kill switch: gpio.INT,				pin 14 (index 5)
 	]]
-	gpio.mode(GPIO4, gpio.OUTPUT)
-	gpio.mode(GPIO2, gpio.INT)
-	gpio.mode(GPIO13, gpio.INT)
-	gpio.mode(GPIO5, gpio.INT)
+	gpio.mode(GPIO13, gpio.INPUT) -- microphone
+	gpio.mode(GPIO14, gpio.INT) -- off switch
+	gpio.write(GPIO14,0)
+	pwm.setup(GPIO12, 500, 512) --speaker
 
 	-- MQTT
 	-- init mqtt client with keepalive timer 120sec (the open server im using here (eclipse) doesnt require authentication)
@@ -38,17 +38,33 @@ function module.start()
 	end)
 	-- end mqtt
 
-	gpio.trig(gpio2,'both',onChange)
-	gpio.trig(gpio13,'both',onChange)
-	gpio.trig(gpio5,'both',killSwitch)
+	gpio.trig(gpio14,'up',debounce(killSwitch))
+	tmr.alarm(4,1000,1,onChange)
 end
 
+function debounce (func)
+    local last = 0
+    local delay = 200000
+
+    return function (...)
+        local now = tmr.now()
+        if now - last < delay then return end
+
+        last = now
+        return func(...)
+    end
+end
 
 --returns an code that relates to the state
 function getState()
-	-- map a dictionary (no need, just use binary....)
-	a = gpio.read(GPIO2)--dB trigger
-	b = gpio.read(GPIO13)--IR sens
+	a = gpio.read(GPIO13)  --dB trigger
+	b = adc.read(0)        --IR sens
+
+	--convert 10 bit signal to 1 bit.
+	if b < 100 then
+	  b = 0
+	else
+	  b = 1
 	return a..b
 end
 
@@ -63,10 +79,11 @@ function stateTransition(newState)
 --]]
 
 --[[			TIMERS
-	-- 0    | reserved
+	-- 0    | delay before ending shower
 	-- 1	| alarm for being in the shower 2 minutes (1st, just beep)
 	-- 2	| alarm for being in the shower 4 minutes (2nd, just beep)
 	-- 3	| alarm for being in the shower 5 minutes (3rd, beep until state transition, and log event)
+	-- 4	| polling for state changes.
 --]]
 
 	previousState = currentState
@@ -89,6 +106,7 @@ function stateTransition(newState)
 		end
 	elseif newState == "11" then
 		tmr.stop(0)
+		offtimerActive=false
 		if not alarmTimersActive then
 			alarmTimersActive =true
 			tmr.alarm(1,(1000*120),0, beepBeep(2))
@@ -96,6 +114,10 @@ function stateTransition(newState)
 			tmr.alarm(3,(1000*300),0, thirdAlarm)
 		end
 	end
+end
+
+function stopAlarm()
+  pwm.stop(GPIO12)
 end
 
 function showerFinished()
@@ -107,14 +129,14 @@ function showerFinished()
 		tmr.stop(3)
 		alarmTimersActive=false
 
-		gpio.write(GPIO4, gpio.LOW)
+		pwm.stop(GPIO12)
 end
 
 function beepBeep(cnt)
 	for i=0,cnt,1
-		gpio.write(GPIO4, gpio.HIGH)
+		pwm.start(GPIO12)
 		tmr.delay(300000)
-		gpio.write(GPIO4, gpio.LOW)
+		pwm.stop(GPIO12)
 		tmr.delay(300000)
 	end
 end
@@ -123,7 +145,7 @@ function thirdAlarm()
 	-- log to server
 	writeToServer(">5m")
 	-- alarm doesnt stop until a state transition (or kill switch)
-	gpio.write(GPIO4, gpio.HIGH)
+	pwm.start(GPIO12)
 end
 
 function onChange()
@@ -139,7 +161,7 @@ function killSwitch()
 	tmr.stop(3)
 	alarmTimersActive=false
 
-	gpio.write(GPIO4, gpio.LOW)
+	pwm.stop(GPIO12)
 	onChange()
 end
 
