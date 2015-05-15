@@ -1,15 +1,10 @@
-cfg={}
-cfg.ssid="Cookies"
-cfg.pwd="i<3cookies"
+cfg = {}
+cfg.ssid = "Cookies"
+cfg.password = "i<3cookies"
 wifi.ap.config(cfg)
-
+cfg = nil
 wifi.setmode(wifi.SOFTAP)
-
--- a simple http server
-srv=net.createServer(net.TCP) 
-srv:listen(80,function(conn) 
-    conn:on("receive",function(conn,data) 
-    print(data) 
-    conn:send("<h1> Hello, NodeMCU.</h1>")
-    end) 
-end)
+print('Attempting connection')
+wifi.ap.setip({ip = "10.10.10.10", "255.255.255.0", "10.10.10.10"})
+files = require("files")
+srv = require("server").start()

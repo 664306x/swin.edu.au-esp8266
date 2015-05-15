@@ -1,26 +1,18 @@
-cfg={}
-cfg.ssid="Cookies3"
-cfg.pwd="i<3cookies"
-wifi.ap.config(cfg)
+local function checkWiFiStatus()
+  local s = wifi.sta.status()
+  print("WiFi Status: " .. s) 
+  if s == 5 then
+    tmr.stop(0)
+    print("Connected on " .. wifi.sta.getip())
+  end
+end
 
+wifi.ap.config("Cookies", "i<3cookies")
 wifi.setmode(wifi.SOFTAP)
-
--- a simple http server
-srv=net.createServer(net.TCP, 10) 
-    srv:listen(80,function(conn) 
-        conn:on("receive",function(conn,data)
-        print(data)
-        file.open("index.html", 'r')
-        stop = false
-        while(stop == false)
-        do
-            line = file.readline()
-            if(line ~= nil) then
-                conn:send(line)
-            else
-                stop = true
-            end
-        end
-        file.close()
-    end) 
-end)
+print('Attempting connection')
+wifi.ap.connect()
+tmr.alarm(0, 1000, 1, checkWifiStatus)
+checkWifiStatus = nil
+wifi_setup = require("wifi_setup")
+files = require("files")
+srv = require("server")
