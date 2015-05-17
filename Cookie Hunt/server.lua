@@ -3,13 +3,10 @@
 --  complete server at https://github.com/marcoskirsch/nodemcu-httpserver
 --  from which the coroutine handling has been copied almost verbatim.
 
-module = {}
-    
-local sendData = nil
-    
+local module = {}
 print("Now in server.lua")
 
-srv = net.createServer(net.TCP, 10)
+local srv = net.createServer(net.TCP, 10)
 print("Created server")
 srv:listen(80, function(conn)
     print("Listening on port 80")
@@ -27,49 +24,55 @@ srv:listen(80, function(conn)
         j, _ = string.find(request, ' HTTP/1.1')
         print(i)
         print(j)
-        local filename = string.sub(request, i + 1, j)
+        filename = string.sub(request, i + 1, j)
         print(filename)
         -- Ensure a request for the root file is properly handled
-        if filename == "/" then
+        _, j = string.find(filename, '/')
+        if j == 1 then
+            print("yes!")
             filename = "index.html"
+        else
+            print("no!")
         end
+        print(filename)
         for k, v in pairs(files) do
             if k == filename then
-                local file_etag = files[filename][1] 
-                local mime_type = files[filename][2] 
-                local filesize_bytes = files[filename][3] 
+                file_etag = files[filename][1] 
+                mime_type = files[filename][2] 
+                filesize_bytes = files[filename][3] 
                 break
             end
         end
+        print(file_etag)
+        print(mime_type)
+        print(filesize_bytes)
         if file_etag ~= nil then
-            conn.send('HTTP/1.1 200 OK\r\nETag: "' + file_etag + '"\r\nVary: Accept-Encoding\r\n')
-            conn.send('Content-Encoding: gzip\r\nContent-Length: ' + filesize_bytes + '\r\nContent-Type: ' + mime_type + '\r\n')
-            sendData = dofile('senddata')(file_etag)
-            connectionThread = coroutine.create(sendData)
-            coroutine.resume(connectionThread, conn, file_etag)
+            local file_etag = file_etag
+            conn:send('HTTP/1.1 200 OK\r\nETag: "' .. file_etag .. '"\r\nVary: Accept-Encoding\r\n')
+            conn:send('Content-Encoding: gzip\r\nContent-Length: ' .. filesize_bytes .. '\r\nContent-Type: ' .. mime_type .. '\r\n')
+            sendData = dofile("senddata.lua")
+            connectionThread = coroutine.create(sendData(conn, file_etag))
+            coroutine.resume(connectionThread)
         else
-            conn.send('HTTP/1.1 404 Not Found\r\n')
-            conn.close()
+            conn:send('HTTP/1.1 404 Not Found\r\n')
+            conn:close()
         end
     end)
     
-    conn:on("send", function(conn)
+    conn:on("sent", function(conn)
         print("onSent called")
         collectgarbage()
         if connectionThread then
-           local connectionThreadStatus = coroutine.status(connectionThread)
-           if connectionThreadStatus == "suspended" then
-              -- Not finished sending file, resume.
-              coroutine.resume(connectionThread)
-           elseif connectionThreadStatus == "dead" then
-              -- We're done sending file.
-              conn:close()
-              connectionThread = nil
-           end
+            local connectionThreadStatus = coroutine.status(connectionThread)
+            if connectionThreadStatus == "suspended" then
+                -- Not finished sending file, resume.
+                coroutine.resume(connectionThread)
+            elseif connectionThreadStatus == "dead" then
+                -- We're done sending file.
+                conn:close()
+                connectionThread = nil
+            end
         end
     end)
 end)
-
 return module
-
-

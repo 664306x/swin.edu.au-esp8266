@@ -1,4 +1,4 @@
-return function(conn, args)
+return function(conn, file_etag)
     print("sendData called")
     local stop = false
     local bytesSent = 0
