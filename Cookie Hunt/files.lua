@@ -1,5 +1,6 @@
 local module = {}
 local function add_file (filename, file_etag, mime_type, filesize_bytes)
+	print("In files.lua")
 	local file = {}
 	module[filename] = file
 	module[filename][1] = file_etag
