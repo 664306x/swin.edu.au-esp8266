@@ -10,11 +10,14 @@ Features
 - Create a monophonic melody from the full western spectrum of music.
 - 6 Octaves of range.
 - Free timing.
+
 ###Example Usage Scenarios
-An esp8266 chip is installed in a toaster. When the toast has popped, the ESP8266 plays a fitting melody, such as the Zelda ‘get item’ melody. By using the music library, the Internet of Things toaster is a lot cooler than if it just buzzed.
+An esp8266 chip is installed in a toaster. When the toast has popped, the ESP8266 plays a fitting melody, such as the Zelda â€˜get itemâ€™ melody. By using the music library, the Internet of Things toaster is a lot cooler than if it just buzzed.
+
 ###Open Issues & Bugs
-The library is currently not working because NodeMCU firmware returns with ‘not enough memory’ when the library is used. This is an open issue because the file is only 778 bytes, and NodeMCU should support up to 24k.  
+The library is currently not working because NodeMCU firmware returns with â€˜not enough memoryâ€™ when the library is used. This is an open issue because the file is only 778 bytes, and NodeMCU should support up to 24k.  
 Until this issue is resolved, the library cannot be used.
+
 ###Code
 Consists of a lua module, which can be used like class in an OOP language.  
 
@@ -84,7 +87,7 @@ return music
 ```
 
 Figure 1:Music.lua
-The library can be used in a user’s application like in figure 2: Usage.lua  
+The library can be used in a userâ€™s application like in figure 2: Usage.lua  
 
 ```lua
 -- Author: Luke Jackson. Swinburne University. 664306x
@@ -100,54 +103,70 @@ Figure 2:Usage.lua
 
 ###API
 **addToMelody()**  
-Description
+_Description_  
 Allows the user to add another note to the end of the current melody.
-Syntax
+
+_Syntax_  
 addToMelody(n,octave,time)
-Parameters
-n: the note. Sharp notes are suffixed with an ‘S’.
+
+_Parameters_
+n: the note. Sharp notes are suffixed with an â€˜Sâ€™.
 octave: octave at which to play the note.
 Time: The timing for the note (how long it is held for).
-Returns
-1: The parameter not is not a note (e.g. ‘H’).
+
+_Returns_  
+1: The parameter not is not a note (e.g. â€˜Hâ€™).
 2: The octave is outside the range (e.g. -1, 2.5, 10)
-Example
+
+_Example_  
 music.addToMelody('FS',5, 0.5}
 
 **setPWMPin()**  
-Description
+_Description_  
 Sets the gpio pin to use for PWM
-Syntax
+
+_Syntax_  
 setPWMPin(pinIndex)
-Parameters
+
+_Parameters_  
 pinIndex: The GPIO pin index to output the PWM.
-Returns
+
+_Returns_  
 nil
-Example
+
+_Example_  
 ~
 
 **play()**  
-Description
+_Description_  
 Plays the current contents of the melody.
-Syntax
+
+_Syntax_  
 play()
-Parameters
+
+_Parameters_  
 ~
-Returns
+
+_Returns_  
 ~
-Example
+
+_Example_  
 Music.play()
 
 **clearMelody()**  
-Description
+_Description_  
 Clears the current contents of the melody.
-Syntax
+
+_Syntax_  
 clearMelody()
-Parameters
+
+_Parameters_  
 ~
-Returns
+
+_Returns_  
 ~
-Example
+
+_Example_  
 ~
 
 
