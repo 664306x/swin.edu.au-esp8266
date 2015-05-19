@@ -87,6 +87,7 @@ return music
 ```
 
 Figure 1:Music.lua
+
 The library can be used in a user’s application like in figure 2: Usage.lua  
 
 ```lua
