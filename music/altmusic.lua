@@ -35,6 +35,7 @@ local function play()
      tmr.stop(0)
      pwm.stop(pinID)
     end
+    print('playing')
 end
 
 return module

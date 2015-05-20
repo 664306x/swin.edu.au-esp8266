@@ -1,9 +1,12 @@
 mel = {}
 notes = require('notes')
 music = require('altmusic')
-usage = require('altusage')
 
 i = 1
+addToMelody('B',4, 4)
+addToMelody('E',5 , 4)
+addToMelody('E',5 , 3)
+print(mel)
 pwm.setup(pinID, mel[i][1], 512)
 pwm.start(pinID)
 sustain = 1
