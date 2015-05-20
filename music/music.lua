@@ -13,14 +13,45 @@ local function tablelength()
   return count
 end
 
-function module.addToMelody(n,octave,time)
-	if octave <1 or octave >9 or octave %1 ~= 0 then
+local function validNote(n)
+    for k in pairs(notes.notes) do
+	   if k == n then
+	       return true
+	   end
+    end
+	return false
+end
+
+function module.addToMelody(n,octave,time,dynamics)
+	if validNote(n) == false then
+		return 1
+    end
+	if octave <1 or octave >6 or octave %1 ~= 0 then
 		return 2
 	end
+	if time <1 or time >8 or time %1 ~=0 then
+	    return 3
+    end
+	if dynamics<0 or dynamics > 1023 or dynamics %1 ~=0 then
+	    return 4
+    end
+
 	l =tablelength()
-	mel[l+1] = {notes.notes[n][octave], time}
-   print('inserted '..mel[l+1][1]..'hz at position: '..l)
-   return true
+	mel[l+1] = {notes.notes[n][octave], time,dynamics}
+   print('inserted '..mel[l+1][1]..'hz at position: '..l+1)
+   return 0
+end
+
+function module.printMelody()
+    l = tablelength()
+	for i=1,l,1 do
+		--print(' '..i..': '..mel[i][1]..'hz, timing: '..mel[i][2]..', dynamics: '..mel[i][3])
+      print(i)
+      print(mel[i][1])
+      print(mel[i][2])
+      print(mel[i][3])
+      print('---')
+	end
 end
 
 function module.setPWMPin(pinIndex)
@@ -29,6 +60,13 @@ end
 
 function module.clearMelody()
 	mel={}
+end
+
+function setTempo(ptempo)
+  if tempo <0 then
+	return 1
+  end
+  tempo = ptempo
 end
 
 function module.play()
@@ -40,7 +78,7 @@ function module.play()
    end
 
    pwm.stop(pinInd)
-   pwm.setup(pinInd, mel[i][1], 256)
+   pwm.setup(pinInd, mel[i][1], mel[i][3])
    pwm.start(pinInd)
    print('playing: '..mel[i][1]..'for: '..mel[i][2]*tempo..'ms')
    tmr.alarm(0,mel[i][2]*tempo,0,module.play)
