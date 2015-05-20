@@ -1,6 +1,5 @@
-# swin.edu.au-esp8266
+# ESP2866 chip project, "Internet of Things"  
 
-ESP2866 chip project, "Internet of Things"  
 Software Development project - SWE30008  
 Supervisor: Rajesh Vasa     
 Client:     James Hamlyn-Harris  
@@ -20,18 +19,37 @@ The home page of the guide provides a summary of the sections.
 Please write a description for this EDWARD
 
 ***
+
+
+
+
+
 ###Hello World
 Please write a description for this EDWIN
 
 ***
+
+
+
+
+
 ###Shower
 luketodo
 
 ***
+
+
+
+
+
 ###ESP8266 Environment Installers
 luketodo
 
 ***
+
+
+
+
 ###Home Security System
 A Secrity Intrustion Detection System for ESP8266.
 
@@ -57,21 +75,65 @@ To example various abilities of the ESP8266 chip running NodeMCU.
 - Should be packaged into an application and init.lua.
 
 ####Code
-- See the .lua files part1.lua and part2.lua.
+See 
+- [part 1](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part1.lua)
+- [part 2](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part2.lua)
 
 ***
+
+
+
+
+
 ###LED Webserver
 Please write a description for this EDWIN
 
 ***
+
+
+
+
+
 ###Music
-luketodo
+A music Library for ESP8266.
+
+Author: Luke Jackson, 664306x.  
+
+####Aim
+To provide an easy to use library that allows people using an ESP8266 chip running the NodeMCU firmware to use the PWM and a speaker to put of melodies. By using the library, people can have their internet of things devices that signal via audio to be more interesting, and useable. 
+Features
+
+- Create a monophonic melody from the full western spectrum of music.
+- 6 Octaves of range.
+- Free timing.
+
+####Example Usage Scenarios
+An esp8266 chip is installed in a toaster. When the toast has popped, the ESP8266 plays a fitting melody, such as the Zelda ‘get item’ melody. By using the music library, the Internet of Things toaster is a lot cooler than if it just buzzed.
+
+####Open Issues & Bugs
+The library is currently not working because NodeMCU firmware returns with ‘not enough memory’ when the library is used. This is an open issue because the file is only 778 bytes, and NodeMCU should support up to 24k.  
+Until this issue is resolved, the library cannot be used.
+
+####Code
+See 
+- [music](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/music.lua)
+- [usage example](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/usage.lua)
 
 ***
+
+
+
+
+
 ###WebIDE
 Please write a description for this ADAM
 
 ***
+
+
+
+
+
 ###Other
 Does not contain any usefull code.  
 Contains research conducted by the team about the problem space and possible solution, scope, deliverables and spikes.
