@@ -18,6 +18,12 @@ The home page of the guide provides a summary of the sections.
 ###Cookie Hunt
 Please write a description for this EDWARD
 
+####Aim
+####Features
+####Example Usage Scenario
+####Open Issues & Bugs
+####Planned Features / Expansion
+####Code
 ***
 
 
@@ -26,7 +32,12 @@ Please write a description for this EDWARD
 
 ###Hello World
 Please write a description for this EDWIN
-
+####Aim
+####Features
+####Example Usage Scenario
+####Open Issues & Bugs
+####Planned Features / Expansion
+####Code
 ***
 
 
@@ -34,8 +45,12 @@ Please write a description for this EDWIN
 
 
 ###Shower
-luketodo
-
+####Aim
+####Features
+####Example Usage Scenario
+####Open Issues & Bugs
+####Planned Features / Expansion
+####Code
 ***
 
 
@@ -43,8 +58,12 @@ luketodo
 
 
 ###ESP8266 Environment Installers
-luketodo
-
+####Aim
+####Features
+####Example Usage Scenario
+####Open Issues & Bugs
+####Planned Features / Expansion
+####Code
 ***
 
 
@@ -69,6 +88,10 @@ To example various abilities of the ESP8266 chip running NodeMCU.
 - The system presented is installed in the mailbox. When the mail arrives, a message is recived on the owners computer, notifying of the mail arrival.
 - Someone wants to learn how to use MQTT (or other concepts covered) by example, so they follow the guide for this project on the WIKI.
 
+####Planned Features / Expansion
+- Disable alarm via code entry.
+- Package into an application (init.lua)
+
 ####Open Issues and Bugs
 - Unable to achieve functionality from a single power source.
 - Wiki should be re-written, using proper single power source.
@@ -78,7 +101,6 @@ To example various abilities of the ESP8266 chip running NodeMCU.
 See 
 - [part 1](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part1.lua)
 - [part 2](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part2.lua)
-
 ***
 
 
@@ -88,9 +110,13 @@ See
 ###LED Webserver
 Please write a description for this EDWIN
 
+####Aim
+####Features
+####Example Usage Scenario
+####Open Issues & Bugs
+####Planned Features / Expansion
+####Code
 ***
-
-
 
 
 
@@ -101,18 +127,23 @@ Author: Luke Jackson, 664306x.
 
 ####Aim
 To provide an easy to use library that allows people using an ESP8266 chip running the NodeMCU firmware to use the PWM and a speaker to put of melodies. By using the library, people can have their internet of things devices that signal via audio to be more interesting, and useable. 
-Features
+
+####Features
 
 - Create a monophonic melody from the full western spectrum of music.
 - 6 Octaves of range.
 - Free timing.
+- Dynamics.
+- API
 
 ####Example Usage Scenarios
 An esp8266 chip is installed in a toaster. When the toast has popped, the ESP8266 plays a fitting melody, such as the Zelda ‘get item’ melody. By using the music library, the Internet of Things toaster is a lot cooler than if it just buzzed.
 
 ####Open Issues & Bugs
-The library is currently not working because NodeMCU firmware returns with ‘not enough memory’ when the library is used. This is an open issue because the file is only 778 bytes, and NodeMCU should support up to 24k.  
-Until this issue is resolved, the library cannot be used.
+-Dynamics function does not seem to be working.
+
+####Planned Features / Expansion
+- Better timing control (more abstracted / high level)
 
 ####Code
 See 
@@ -127,6 +158,12 @@ See
 
 ###WebIDE
 Please write a description for this ADAM
+####Aim
+####Features
+####Example Usage Scenario
+####Open Issues & Bugs
+####Planned Features / Expansion
+####Code
 
 ***
 
