@@ -24,6 +24,8 @@ Please write a description for this EDWARD
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code  
+- [repository]()
+- 
 
 ***
 
@@ -39,6 +41,8 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+- [repository]()
+- 
 
 ***
 
@@ -53,6 +57,7 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+- [repository](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Shower)
 
 ***
 
@@ -62,11 +67,30 @@ Please write a description for this EDWIN
 
 ###ESP8266 Environment Installers
 ####Aim
+The installer provides a one click solution to getting a Windows PC ready to start playing with an ESP8266. The installer bundles tools we have found to be necessary or usefull for working with an ESP8266.
+
 ####Features
+The following are included, as of the latest version.  
+- Check for Java installation. Link to download page if not found. (requied for ESPlorer).
+- Check for lua for windows installation. Links to the download page if not found. This is not a dependency, but makes writing and debugging lua code a much more enjoyable task.
+- ESPlorer, an IDE written by todo which provides a gui for serial communication (requires Java).
+- ESP8266Flasher.exe, an application written by todo which provides an easy to use gui for flashing new firmware to an ESP8266 chip.
+- Firmware.
+- Example .lua scripts.
+
 ####Example Usage Scenario
+Somebody wants to get up to scratch with an ESP8266 in a few hours. By running the installer, they will have a folder on their PC that includes everything they will need to follow every section of the guide. They are able to focus on using the chip and not researching the best or required software.
+
 ####Open Issues & Bugs
+-Leaves the archive after install. Should delete it.
+
 ####Planned Features / Expansion
+-Include links to all included files pages
+-Update check
+
 ####Code
+The installer was created with [inno setup](http://www.jrsoftware.org/isinfo.php). The .iss is the source code.
+- [repository](https://github.com/664306x/swin.edu.au-esp8266/tree/master/esp8266_environment_installers/win)
 
 ***
 
@@ -103,9 +127,10 @@ To example various abilities of the ESP8266 chip running NodeMCU.
 
 ####Code
 See 
+- [repository](https://github.com/664306x/swin.edu.au-esp8266/tree/master/homeSecuritySystem)
 - [part 1](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part1.lua)
 - [part 2](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part2.lua)
-- 
+
 ***
 
 
@@ -121,6 +146,7 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+- [repository]()
 
 ***
 
@@ -153,6 +179,7 @@ An esp8266 chip is installed in a toaster. When the toast has popped, the ESP826
 
 ####Code
 See 
+- [repository](https://github.com/664306x/swin.edu.au-esp8266/tree/master/music)
 - [music](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/music.lua)
 - [notes](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/notes.lua)
 - [usage example](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/usage_example.lua)
@@ -171,6 +198,7 @@ Please write a description for this ADAM
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+- [repository]()
 
 ***
 
@@ -184,6 +212,8 @@ Contains research conducted by the team about the problem space and possible sol
 
 ####Spikes
 A spike is a methodology for identidying and effeciently overcoming a knowledge gap. The team embraced spiking to solve many of the early knowledge gap, and the achieved knowledge is recorded in the outcomes here. These outcomes can be usefull for filling knowledge gaps on there topics.
+
+[PDFs](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Other/Spikes)
 
 ####Guide pictures
 Using Git to host the images used in the guide.
