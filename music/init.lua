@@ -2,6 +2,8 @@ mel = {}
 notes = require('notes')
 music = require('altmusic')
 usage = require('altusage')
+usage = nil
+collectgarbage()
 
 i = 1
 pwm.setup(pinID, mel[i][1], 512)
