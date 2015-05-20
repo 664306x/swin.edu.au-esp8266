@@ -34,7 +34,7 @@ function addToMelody(n,octave,time)
 	or n  ~= 'G' or n  ~= 'GS' or n  ~= 'A' or n  ~= 'AS' or note  ~= 'B' or note  ~= 'R' then
 		return 1
 	end
-	if octave <1 or octave >9 or octave %1 ~= 0
+	if octave <1 or octave >9 or octave %1 ~= 0 then
 		return 2
 	end
 	l =tablelength()
