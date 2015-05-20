@@ -1,6 +1,6 @@
 local module = {}
 
-local pinID = 6
+pinID = 6
 
 function addToMelody(n,octave,time)
     local function checkNote(n)
