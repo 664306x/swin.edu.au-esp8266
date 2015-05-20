@@ -23,7 +23,8 @@ Please write a description for this EDWARD
 ####Example Usage Scenario
 ####Open Issues & Bugs
 ####Planned Features / Expansion
-####Code
+####Code  
+
 ***
 
 
@@ -38,6 +39,7 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+
 ***
 
 
@@ -51,6 +53,7 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+
 ***
 
 
@@ -64,6 +67,7 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+
 ***
 
 
@@ -101,6 +105,7 @@ To example various abilities of the ESP8266 chip running NodeMCU.
 See 
 - [part 1](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part1.lua)
 - [part 2](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part2.lua)
+- 
 ***
 
 
@@ -116,6 +121,7 @@ Please write a description for this EDWIN
 ####Open Issues & Bugs
 ####Planned Features / Expansion
 ####Code
+
 ***
 
 
@@ -148,7 +154,8 @@ An esp8266 chip is installed in a toaster. When the toast has popped, the ESP826
 ####Code
 See 
 - [music](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/music.lua)
-- [usage example](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/usage.lua)
+- [notes](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/notes.lua)
+- [usage example](https://github.com/664306x/swin.edu.au-esp8266/blob/master/music/usage_example.lua)
 
 ***
 
