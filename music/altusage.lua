@@ -1,6 +1,6 @@
 -- Author: Luke Jackson. Swinburne University. 664306x
 
-music = require("music")
+local module = {}
 
 music.addToMelody('B',4, 4)
 music.addToMelody('E',5 , 4}
@@ -18,4 +18,4 @@ music.addToMelody('E',5 , 2}
 music.addToMelody('FS',5, 2}
 music.addToMelody('FS',5,  2}
 
-music.play()
+return module

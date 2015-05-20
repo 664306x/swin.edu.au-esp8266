@@ -1,6 +1,6 @@
 notes = require('notes')
-notenames = require('notenames')
 music = dofile('altmusic')
+music = require('altusage')
 
 pwm.setup(pinID, mel[i][1], 512)
 pwm.start(pinID)
