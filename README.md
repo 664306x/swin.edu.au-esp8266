@@ -33,14 +33,29 @@ Please write a description for this EDWARD
 
 
 ###Hello World
-Please write a description for this EDWIN
+Getting a LED to turn on and off.
+
 ####Aim
+This project aims to get basic start on how to use the GPIO pins on the ESP8266 and identify the corresponding IO index to GPIO pins using the table index. By using the GPIO pins to turn on and off the LED. Some features like using timer and PWM is also introduced. It also looks at how to setup a simple HTTP webserver using TCP connection and through the webserver to control the LED.
+
 ####Features
+- How to use the GPIO pins
+- Using timer
+- Using Pulse Width Modulation
+- Connect to Wi-Fi access point
+- Host a webserver
+
 ####Example Usage Scenario
+One of the best way to get to know about the ESP8266 and get a start on using it. Instead of using to turn on and off the LED, other small voltage appliances can be attached to the GPIO pins and can be controlled from it, example a small speaker that will beep when the pin is set.
+
 ####Open Issues & Bugs
+- Connection of the LED to the ESP8266 via the breadboard diagram needs to be label
+
 ####Planned Features / Expansion
+- Add more detailed diagrams on how to connect a LED to the ESP8266 via a breadboard
+
 ####Code
-- [repository]()
+- [repository](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Hello%20World)
 
 ***
 
