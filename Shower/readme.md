@@ -33,3 +33,8 @@ A person who sufferes dementia may enter a hot shower and lose track of how long
 - Multi sensor version
 - LED screen
 - Flow sensor module incorporation.
+
+##Code
+[Incomplete full version (future work)](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Shower/full%20version%20alpha)
+[initial prototype](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Shower/small)
+[submission version](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Shower/small_online)
