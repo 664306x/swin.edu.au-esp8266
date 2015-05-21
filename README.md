@@ -49,6 +49,10 @@ Please write a description for this EDWIN
 
 
 ###Shower
+An online sensor for how long presence in shower.
+
+Author: Luke Jackson, 664306x 
+
 ####Aim
 This project aims to build a sensor that can determine presence in a shower stall, and determine whether the shower is running. After a defined time limit, a beep will issue (for proof of concept) giving indication of time spent. After a subsequent defined time limit, a message will be logged on an external server so that medical staff can be aware that there patient has been exposed and how frequently. For information please see the readme in the [repository](https://github.com/664306x/swin.edu.au-esp8266/tree/master/Shower).
 
@@ -90,6 +94,10 @@ A person who sufferes dementia may enter a hot shower and lose track of how long
 
 
 ###ESP8266 Environment Installers
+An environment setup installer.
+
+Author: Luke Jackson, 664306x 
+
 ####Aim
 The installer provides a one click solution to getting a Windows PC ready to start playing with an ESP8266. The installer bundles tools we have found to be necessary or usefull for working with an ESP8266.
 
