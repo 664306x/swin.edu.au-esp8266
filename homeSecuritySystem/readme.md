@@ -17,6 +17,10 @@ To example various abilities of the ESP8266 chip running NodeMCU.
 - The system presented is installed in the mailbox. When the mail arrives, a message is recived on the owners computer, notifying of the mail arrival.
 - Someone wants to learn how to use MQTT (or other concepts covered) by example, so they follow the guide for this project on the WIKI.
 
+####Planned Features / Expansion
+- Disable alarm via code entry.  
+- Package into an application (init.lua)  
+
 ###Open Issues and Bugs
 - Unable to achieve functionality from a single power source.
 - Wiki should be re-written, using proper single power source.
