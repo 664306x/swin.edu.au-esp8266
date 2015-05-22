@@ -11,5 +11,5 @@ function w()
 end
 
 wifi.setmode(wifi.STATION)
-wifi.sta.config("Dylan ", "apple123")
+wifi.sta.config("yourssid", "yourpassword")
 w()
