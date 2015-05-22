@@ -4,25 +4,43 @@ Software Development project - SWE30008
 Supervisor: Rajesh Vasa     
 Client:     James Hamlyn-Harris  
 
-This is a capstone project which involves presenting guidance for using the esp8266 chip. The ESP8266 is a very cheap (< $5 USD) device which has full wi-fi functionality, hardware interfaces and SOC.  It is young and whilst the community is developing fast, it is still not as widely adopted as alternatives like rasbery pie. Is small size and price make it potentially ideal for 'Internet of Things' applications.
+This is a capstone project which involves presenting guidance for using the esp8266 chip. The ESP8266 is a very cheap (< $5 USD) device which has full wi-fi functionality, hardware interfaces and SOC.  It is young and whilst the community is developing fast, it is still not as widely adopted as alternatives like rasbery pi. Its small size and price make it potentially ideal for 'Internet of Things' applications.
 
 The current version of the guide is in the project wiki, while the repository itself contains a mixture of code snippits. Some these are part of the guide, and some are other example projets, or work in progress projects. The guide is closed for submissions until the conclusion of our project, after which we are hoping to release it on an open content license such as CC-A.
 
 Feel free to message us if you have any queries or want to provide feedback.
 
 ## Guide Summary
-The guide can be accessed as this repositories wiki.  
+The guide can be accessed as the wiki of this repository.  
 The home page of the guide provides a summary of the sections.
 
 ## Repository Codes
-###Cookie Hunt
-Please write a description for this EDWARD
+### Cookie Hunt
 
-####Aim
-####Features
+#### Aim
+
+This project aims to provide a proof-of-concept web server, that maintains a single Javascript cookie across multiple ESP8266 devices. It is implemented as a game - you connect to each ESP8266 station in a geographical area to win.
+
+Author: Edward Francis Gilbert. Additional code by Adam De Blasio
+ 
+#### Features
+
+Contains a simple web server that returns just one page.
+
 ####Example Usage Scenario
+
+This concept could be applied to any sort of guide across a geographical area; for example - a zoo, botanic gardens, or museum online tour. The cookie can be used to provide state for the user (where they have and have not been yet on the guide). It also has application as a simple 
+
 ####Open Issues & Bugs
+
+- It has been tested on Firefox and Chrome on Windows, Linux and Android devices, but testing across other devices and browsers would be highly recommended. Safari on Apple devices in particular has not been tested.
+- Large files ( > 1460 bytes) may not be handled properly, this also needs testing
+- I could not manage to implement serving of multiple files on the device, but my work on this has been included
+
 ####Planned Features / Expansion
+
+- Support for multiple compressed files to be served is intended.
+
 ####Code  
 - [repository]()
 
@@ -33,10 +51,12 @@ Please write a description for this EDWARD
 
 
 ###Hello World
-Getting a LED to turn on and off.
+
 
 ####Aim
 This project aims to get basic start on how to use the GPIO pins on the ESP8266 and identify the corresponding IO index to GPIO pins using the table index. By using the GPIO pins to turn on and off the LED. Some features like using timer and PWM is also introduced. It also looks at how to setup a simple HTTP webserver using TCP connection and through the webserver to control the LED.
+
+Author: Edwin Wong, additional programming by Edward Francis Gilbert
 
 ####Features
 - How to use the GPIO pins
@@ -178,22 +198,6 @@ See
 - [part 1](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part1.lua)
 - [part 2](https://github.com/664306x/swin.edu.au-esp8266/blob/master/homeSecuritySystem/part2.lua)
 
-***
-
-
-
-
-
-###LED Webserver
-Please write a description for this EDWIN
-
-####Aim
-####Features
-####Example Usage Scenario
-####Open Issues & Bugs
-####Planned Features / Expansion
-####Code
-- [repository]()
 
 ***
 

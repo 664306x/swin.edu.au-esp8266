@@ -1,4 +1,4 @@
-##A Secrity Intrustion Detection System for ESP8266.
+##A Security Intrusion Detection System for ESP8266.
 
 Luke Jackson, 664306x  
 Swinburne University.

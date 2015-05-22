@@ -1,4 +1,8 @@
 -- Blink an LED light attached to GPIO0 on and off repeatedly
+
+-- Author Edward Francis Gilbert
+-- Created Friday 8 May 2015
+
 gpio.mode(3, gpio.OUTPUT, gpio.PULLUP)
 
 function blinky()
