@@ -242,16 +242,40 @@ See
 
 
 ###WebIDE
-Please write a description for this ADAM
+A simply proof of concept for bypassing serial connect and sending commands via a webpage
+
 ####Aim
+The project aims to prove that code could be sent via a webpage to the ESP over a network and that code can be ran returning any outputs back to that webpage.
+
 ####Features
+- Can take simple lua command line code
+-	Can process multiple lines
+-	Prints anything that would go through serial to the webpage as well as serial
+-	Retains log of previous commands
+
 ####Example Usage Scenario
+- Print(node.heap()) will return node.heap() to webpage
+-	dofile(temp.lua) runs the temp.lua file
+-	node.format() removes file system
+-	file.remove("helloworld.lua")
+  file.open("helloworld.lua ","w")
+  file.writeline(“print(“Hello World!”)”) these 3 lines would remove the helloworld file and write print(“Hello World!”) to that file
+- Any code or command you could send via serial
+
 ####Open Issues & Bugs
+Log file will get full (Approx. 1024 bytes) and will crash and restart itself
+Invalid syntax will crash and restart the ESP
+
 ####Planned Features / Expansion
+- Error handling
+-	Limit Log file lines to 10 on the webpage
+-	Add buttons for quick commands
+
 ####Code
-- [repository]()
+- [repository]( https://github.com/664306x/swin.edu.au-esp8266/tree/master/webIDE)
 
 ***
+
 
 
 
