@@ -277,8 +277,61 @@ Invalid syntax will crash and restart the ESP
 ***
 
 
+### Mail notifier
 
+#### Aim
 
+This project aims to create a notification system for when snail mail is put in a mail box, through the use of an IR beam sensor.
+
+Author: Edward Francis Gilbert.
+#### Features
+
+Code for detecting when an IR beam has been tripped.
+
+####Example Usage Scenario
+
+In a mailbox (duh)
+
+####Open Issues & Bugs
+
+- Not completed
+
+####Planned Features / Expansion
+
+Complete and show examples in use.
+
+####Code  
+- [repository]()
+
+***
+
+### Iron notification
+
+#### Aim
+
+This project aims to send a timely notification when an iron has been left on and unused, or left  on and lying down.
+
+Author: Edward Francis Gilbert.
+#### Features
+
+Makes use of an analog temperature sensor.
+
+####Example Usage Scenario
+
+An iron left on and unused (or prone), will trigger a notification to the user.
+
+####Open Issues & Bugs
+
+- Unfinished, in the early stages of development
+
+####Planned Features / Expansion
+
+- Finish the project, include details on how to set the right values for different irons if necessary.
+
+####Code  
+- [repository]()
+
+***
 
 
 ###Other
